@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="NopCommerce">
+    <test name="Run on Chrome">
+        <classes>
+            <class name="account.Account_01_Register"></class>
+        </classes>
+    </test>
+</suite>
