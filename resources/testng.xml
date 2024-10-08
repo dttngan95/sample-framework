@@ -2,8 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="NopCommerce">
     <test name="Run on Chrome">
+        <parameter name="browser" value="chrome" />
         <classes>
-            <class name="account.Account_01_Register"></class>
+            <class name="account.Account_01_Register" />
         </classes>
     </test>
 </suite>

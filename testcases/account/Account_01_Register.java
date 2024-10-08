@@ -1,6 +1,7 @@
 package account;
 
 import commons.BasePage;
+import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -8,6 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.CustomerPageObject;
 import pageObjects.HomePageObject;
@@ -17,33 +19,22 @@ import pageObjects.RegisterPageObject;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class Account_01_Register extends BasePage {
+public class Account_01_Register extends BaseTest {
     private WebDriver driver;
-    private String projectPath = System.getProperty("user.dir");
     private HomePageObject homePage;
     private RegisterPageObject registerPage;
     private LoginPageObject loginPage;
     private CustomerPageObject customerPage;
     private String emailAddress = getEmailRandom();
 
+    @Parameters("browser")
     @BeforeClass
-    public void beforeClass() {
-        System.getProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
-        System.getProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
-        System.getProperty("webdriver.msedge.driver", projectPath + "\\browserDrivers\\msedgedriver.exe");
-        //driver = new FirefoxDriver();
-        driver = new ChromeDriver();
-        //driver = new EdgeDriver();
-
-        driver.get("https://demo.nopcommerce.com/");
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-
-        homePage = new HomePageObject(driver);
-
+    public void beforeClass(String browserName) {
+        driver = getBrowserName(browserName);
     }
-
     @Test
     public void User_01_Register_Empty_Data() {
+        homePage = new HomePageObject(driver);
         homePage.clickToRegisterLink();
 
         registerPage = new RegisterPageObject(driver);
@@ -145,9 +136,7 @@ public class Account_01_Register extends BasePage {
     }
 
     @AfterClass
-
-    public String getEmailRandom() {
-        Random rand = new Random();
-        return "john" + rand.nextInt(99999) + "@kennedy.us";
+    public void afterClass() {
+        closeBrowser();
     }
 }
