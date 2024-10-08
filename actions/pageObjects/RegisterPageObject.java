@@ -16,12 +16,12 @@ public class RegisterPageObject extends BasePage {
 
     public String getFirstNameErrorMessageText() {
         waitForElementVisible(driver, RegisterPageUI.FIRSTNAME_ERROR_MSG);
-        return getElementText(driver, RegisterPageUI.FIRSTNAME_ERROR_MSG)
+        return getElementText(driver, RegisterPageUI.FIRSTNAME_ERROR_MSG);
     }
 
     public String getLastNameErrorMessageText() {
-        waitForElementVisible((driver, RegisterPageUI.LASTNAME_ERROR_MSG));
-        return  getElementText(driver, RegisterPageUI.LASTNAME_ERROR_MSG)
+        waitForElementVisible(driver, RegisterPageUI.LASTNAME_ERROR_MSG);
+        return  getElementText(driver, RegisterPageUI.LASTNAME_ERROR_MSG);
     }
 
     public String getEmailErrorMessageText() {
@@ -69,10 +69,8 @@ public class RegisterPageObject extends BasePage {
         sendKeyToElement(driver, RegisterPageUI.CONFIRM_PASSWORD_TEXTBOX, passwordValue);
     }
 
-    public void clickToRegisterButton() {
-    }
-
-    public byte[] getRegisterSuccessMessageText() {
-        waitForElementVisible(driver, RegisterPageUI.);
+    public String getRegisterSuccessMessageText() {
+        waitForElementVisible(driver, RegisterPageUI.REGISTRATION_COMPLETED_MSG);
+        return getElementText(driver, RegisterPageUI.REGISTRATION_COMPLETED_MSG);
     }
 }

@@ -158,7 +158,7 @@ public class BasePage {
     }
 
     public String getElementCssValue(WebDriver driver, String locator, String cssPropertyName) {
-        return getWebElement(driver, locator).getCssValue(cssPropertyName)
+        return getWebElement(driver, locator).getCssValue(cssPropertyName);
     }
 
     public String convertRGBAToHexaColor(WebDriver driver, String locator) {
@@ -167,7 +167,7 @@ public class BasePage {
     }
 
     public int getListElementSize(WebDriver driver, String locator) {
-        return getListWebElement(driver, locator).size()
+        return getListWebElement(driver, locator).size();
     }
 
     public void checkToElement(WebDriver driver, String locator) {

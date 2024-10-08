@@ -31,14 +31,14 @@ public class Account_01_Register extends BasePage {
         System.getProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
         System.getProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
         System.getProperty("webdriver.msedge.driver", projectPath + "\\browserDrivers\\msedgedriver.exe");
-        driver = new FirefoxDriver();
+        //driver = new FirefoxDriver();
         driver = new ChromeDriver();
-        driver = new EdgeDriver();
+        //driver = new EdgeDriver();
 
         driver.get("https://demo.nopcommerce.com/");
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
-        homePage = new HomePageObject();
+        homePage = new HomePageObject(driver);
 
     }
 
@@ -46,7 +46,7 @@ public class Account_01_Register extends BasePage {
     public void User_01_Register_Empty_Data() {
         homePage.clickToRegisterLink();
 
-        registerPage = new RegisterPageObject();
+        registerPage = new RegisterPageObject(driver);
         registerPage.clickToRegisterButton();
         Assert.assertEquals(registerPage.getFirstNameErrorMessageText(), "First name is required.");
         Assert.assertEquals(registerPage.getLastNameErrorMessageText(), "Last name is required.");
@@ -57,10 +57,10 @@ public class Account_01_Register extends BasePage {
 
     public void User_02_Register_Invalid_Email() {
         registerPage.clickToNopCommerceImage();
-        homePage = new HomePageObject();
+        homePage = new HomePageObject(driver);
 
         homePage.clickToRegisterLink();
-        registerPage = new RegisterPageObject();
+        registerPage = new RegisterPageObject(driver);
 
         registerPage.enterToFirstNameTextbox("John");
         registerPage.enterToFLastNameTextbox("Kennedy");
@@ -73,10 +73,10 @@ public class Account_01_Register extends BasePage {
 
     public void User_03_Register_Invalid_Password() {
         registerPage.clickToNopCommerceImage();
-        homePage = new HomePageObject();
+        homePage = new HomePageObject(driver);
 
         homePage.clickToRegisterLink();
-        registerPage = new RegisterPageObject();
+        registerPage = new RegisterPageObject(driver);
 
         registerPage.enterToFirstNameTextbox("John");
         registerPage.enterToFLastNameTextbox("Kennedy");
@@ -84,32 +84,32 @@ public class Account_01_Register extends BasePage {
         registerPage.enterToFPasswordextbox("123");
         registerPage.enterToConfirmPasswordTextbox("123");
         registerPage.clickToRegisterButton();
-        Assert.assertEquals(registerPage.getPasswordErrorMessageText(), 'Password must meet the following rules:\nmust have at least 6 characters and not greater than 64 characters');
+        Assert.assertEquals(registerPage.getPasswordErrorMessageText(), "Password must meet the following rules:\nmust have at least 6 characters and not greater than 64 characters");
 
     }
 
     public void User_04_Register_Incorrect_Confirm_Password() {
         registerPage.clickToNopCommerceImage();
-        homePage = new HomePageObject();
+        homePage = new HomePageObject(driver);
 
         homePage.clickToRegisterLink();
-        registerPage = new RegisterPageObject();
+        registerPage = new RegisterPageObject(driver);
 
         registerPage.enterToFirstNameTextbox("John");
         registerPage.enterToFLastNameTextbox("Kennedy");
         registerPage.enterToEmailTextbox(getEmailRandom());
         registerPage.enterToFPasswordextbox("123456");
-        registerPage.enterToConfirmPasswordTextbox("123123"');
+        registerPage.enterToConfirmPasswordTextbox("123123");
         registerPage.clickToRegisterButton();
         Assert.assertEquals(registerPage.getConfirmPasswordErrorMessageText(), "The password and confirmation password do not match.");
     }
 
     public void User_05_Register_Success() {
         registerPage.clickToNopCommerceImage();
-        homePage = new HomePageObject();
+        homePage = new HomePageObject(driver);
 
         homePage.clickToRegisterLink();
-        registerPage = new RegisterPageObject();
+        registerPage = new RegisterPageObject(driver);
 
         registerPage.enterToFirstNameTextbox("John");
         registerPage.enterToFLastNameTextbox("Kennedy");
@@ -123,21 +123,21 @@ public class Account_01_Register extends BasePage {
 
     public void User_06_Login_Success() {
         registerPage.clickToNopCommerceImage();
-        homePage = new HomePageObject();
+        homePage = new HomePageObject(driver);
         homePage.clickToLoginLink();
 
-        loginPage = new LoginPageObject();
-        loginPage.enterToEmailTextbox(emailAddress;
+        loginPage = new LoginPageObject(driver);
+        loginPage.enterToEmailTextbox(emailAddress);
         loginPage.enterToPasswordTextbox("123456");
         loginPage.clickToLoginButton();
 
-        homePage = new HomePageObject();
+        homePage = new HomePageObject(driver);
         homePage.clickToMyAccountLink();
 
-        customerPage = new CustomerPageObject();
+        customerPage = new CustomerPageObject(driver);
         Assert.assertEquals(customerPage.getFirstNameTextboxAttributeValue(), "John");
-        Assert.assertEquals(customerPage.getLaseNameTextboxAttributeValue(), "Kennedy");
-        Assert.assertEquals(customerPage.getFEmailTextboxAttributeValue(), emailAddress);
+        Assert.assertEquals(customerPage.getLastNameTextboxAttributeValue(), "Kennedy");
+        Assert.assertEquals(customerPage.getEmailTextboxAttributeValue(), emailAddress);
 
 
 
