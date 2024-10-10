@@ -34,6 +34,7 @@ public class Account_01_Register extends BaseTest {
     }
     @Test
     public void User_01_Register_Empty_Data() {
+
         homePage = new HomePageObject(driver);
         homePage.clickToRegisterLink();
 

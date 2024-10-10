@@ -10,6 +10,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="selenium-server-standalone-3.141.59" level="project" />
+    <orderEntry type="library" name="selenium-server-4.25.0" level="project" />
+    <orderEntry type="library" name="selenium-api-4.25.0-sources" level="project" />
+    <orderEntry type="library" name="commons-io-2.13.0" level="project" />
+    <orderEntry type="library" name="webdrivermanager-5.6.2-sources" level="project" />
   </component>
 </module>

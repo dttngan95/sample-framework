@@ -1,5 +1,6 @@
 package commons;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.time.Duration;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -18,24 +20,23 @@ public class BaseTest {
 
         BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
         if (browser == BrowserList.FIREFOX) {
-            System.getProperty("webdriver.gecko.driver\", projectPath + \"\\\\browserDrivers\\\\geckodriver.exe");
-            driver = new FirefoxDriver();
+            driver = WebDriverManager.firefoxdriver().create();
         } else if (browser == BrowserList.CHROME) {
-            System.getProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
             driver = new ChromeDriver();
+            //driver = WebDriverManager.chromedriver().create();
         } else if (browser == BrowserList.EDGE) {
-            System.getProperty("webdriver.msedge.driver\", projectPath + \"\\\\browserDrivers\\\\msedgedriver.exe");
             driver = new EdgeDriver();
+           // driver = WebDriverManager.edgeDriver().create();
         } else throw new RuntimeException("Browser name is not valid");
 
 //        switch (browser) {
-//            case FIREFOX -> System.getProperty("webdriver.gecko.driver\", projectPath + \"\\\\browserDrivers\\\\geckodriver.exe");
+//            case FIREFOX -> System.getProperty("webDriver.gecko.driver\", projectPath + \"\\\\browserDrivers\\\\geckodriver.exe");
 //            driver = new FirefoxDriver();
 //            break;
-//            case CHROME -> System.getProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+//            case CHROME -> System.getProperty("webDriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
 //            driver = new ChromeDriver();
 //            break;
-//            case EDGE -> System.getProperty("webdriver.msedge.driver\", projectPath + \"\\\\browserDrivers\\\\msedgedriver.exe");
+//            case EDGE -> System.getProperty("webDriver.msEdge.driver\", projectPath + \"\\\\browserDrivers\\msedgedriver.exe");
 //            driver = new EdgeDriver();
 //            break;
 //            default -> throw new RuntimeException("Browser name is not valid");
@@ -44,7 +45,7 @@ public class BaseTest {
         driver.manage().window().setPosition(new Point(0,0));
         driver.manage().window().setSize(new Dimension(1920,1080));
 
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.get("https://demo.nopcommerce.com/");
         return driver;
     }
